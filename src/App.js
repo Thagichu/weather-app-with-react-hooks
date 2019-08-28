@@ -1,9 +1,9 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios'
 
 const proxy = 'https://cors-anywhere.herokuapp.com/'
-const url = `${proxy}https://api.darksky.net/forecast/aa3ffcb4c74da763ce9759d10d08468f/-1.3032051,36.707309`
+const url = `${proxy}https://api.darksky.net/forecast/<API KEY>/-1.3032051,36.707309`
 
 
 function App() {
@@ -12,21 +12,21 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
 
-const icons = {
-  "clear-day": "", 
-  "clear-night": "", 
-  "rain":"", 
-  "snow":"", 
-  "sleet":"", 
-  "wind":"", 
-  "fog":"", 
-  "cloudy":"", 
-  "partly-cloudy-day":"",
-  "partly-cloudy-night":"",
-  "default":""
-}
+  const icons = {
+    "clear-day": "",
+    "clear-night": "",
+    "rain": "",
+    "snow": "",
+    "sleet": "",
+    "wind": "",
+    "fog": "",
+    "cloudy": "",
+    "partly-cloudy-day": "",
+    "partly-cloudy-night": "",
+    "default": ""
+  }
 
-useEffect(async () => {
+  useEffect(async () => {
     const result = await axios(
       url
     );
@@ -35,23 +35,23 @@ useEffect(async () => {
     console.log(result.data)
     setIsLoading(false);
   }, []);
-   
+
 
   return (
     <div className="app">
-    {isLoading ?
-<h1>Loading</h1>:
-<div>
-   <h1>{weatherData.timezone}</h1>
-   <h1>{weatherData.currently.summary}</h1>
-   <div className="temp">
-   <h1> <i class="fas fa-thermometer-quarter">
-   </i>  {weatherData.currently.temperature}</h1>
-   </div>
-      <h1>{ new Date( weatherData.currently.time *1000).toGMTString()}</h1>
-</div>
-     }
-   
+      {isLoading ?
+        <h1>Loading</h1> :
+        <div>
+          <h1>{weatherData.timezone}</h1>
+          <h1>{weatherData.currently.summary}</h1>
+          <div className="temp">
+            <h1> <i class="fas fa-thermometer-quarter">
+            </i>  {weatherData.currently.temperature}</h1>
+          </div>
+          <h1>{new Date(weatherData.currently.time * 1000).toGMTString()}</h1>
+        </div>
+      }
+
     </div>
   );
 }
